@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+  <category>RegisterCirclesLab</category>
+  <title>ResampleImage</title>
+  <description>Resamples a moving NRRD image into the physical space of a reference NRRD image using ITK ResampleImageFilter. Output shares the spacing, origin, direction, and size of the reference image so that registration metrics have full pixel overlap.</description>
+  <documentation-url>https://github.com/uiowaMIATT2026/RegisterCirclesLab</documentation-url>
+  <license>Apache 2.0</license>
+  <contributor>Hans J. Johnson; Swati Ramtilak (sramtilak)</contributor>
+  <acknowledgements>ITK ResampleImageFilter, LinearInterpolateImageFunction. ECE:5490 MIATT 2026.</acknowledgements>
+  <version>0.0.1</version>
+
+  <parameters>
+    <label>Input/Output</label>
+    <description>Input images and output file path</description>
+
+    <image>
+      <name>inputImageFile</name>
+      <longflag>inputImage</longflag>
+      <label>Input Image</label>
+      <description>Path to the input NRRD image to be resampled (the moving image).</description>
+      <channel>input</channel>
+    </image>
+
+    <image>
+      <name>referenceImageFile</name>
+      <longflag>referenceImage</longflag>
+      <label>Reference Image</label>
+      <description>Path to the reference NRRD image whose spacing, origin, direction, and size define the output grid.</description>
+      <channel>input</channel>
+    </image>
+
+    <image>
+      <name>outputImageFile</name>
+      <longflag>outputImage</longflag>
+      <label>Output Image</label>
+      <description>Path to the resampled output NRRD image in reference image space.</description>
+      <channel>output</channel>
+      <default>resampled.nrrd</default>
+    </image>
+
+  </parameters>
+
+  <parameters>
+    <label>Resampling Parameters</label>
+    <description>Controls for the resampling operation</description>
+
+    <double>
+      <name>defaultPixelValue</name>
+      <longflag>defaultPixelValue</longflag>
+      <label>Default Pixel Value</label>
+      <description>Pixel value used for voxels that map outside the input image boundary.</description>
+      <default>0.0</default>
+      <constraints><minimum>0.0</minimum><maximum>65535.0</maximum><step>1.0</step></constraints>
+    </double>
+
+  </parameters>
+
+</executable>

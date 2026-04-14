@@ -34,3 +34,4 @@ set(MYHAWKID "sramtilak") # <----- YOU MUST CHANGE THIS!
 
 add_subdirectory(GenerateCircles)
 add_subdirectory(RegisterImages)
+add_subdirectory(ResampleImage)
