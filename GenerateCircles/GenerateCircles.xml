@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+  <category>RegisterCirclesLab</category>
+  <title>GenerateCircles</title>
+  <description>Generates two 2D binary circle images from user-supplied physical parameters and saves each as NRRD (with metadata) and PNG.</description>
+  <documentation-url>https://github.com/uiowaMIATT2026/RegisterCirclesLab</documentation-url>
+  <license>Apache 2.0</license>
+  <contributor>Hans J. Johnson; Swati Ramtilak (sramtilak)</contributor>
+  <acknowledgements>ITK ImageRegionIteratorWithIndex. ECE:5490 MIATT 2026.</acknowledgements>
+  <version>0.0.1</version>
+
+  <parameters>
+    <label>Output Files</label>
+    <description>Output image paths for img1 and img2</description>
+
+    <image>
+      <name>outputNRRD1</name>
+      <longflag>outputNRRD1</longflag>
+      <label>Output NRRD img1</label>
+      <description>Output NRRD file for img1. Retains spacing, origin, and direction cosines.</description>
+      <channel>output</channel>
+      <default>img1.nrrd</default>
+    </image>
+
+    <image>
+      <name>outputPNG1</name>
+      <longflag>outputPNG1</longflag>
+      <label>Output PNG img1</label>
+      <description>Output PNG file for img1. Pixel data only, no physical metadata.</description>
+      <channel>output</channel>
+      <default>img1.png</default>
+    </image>
+
+    <image>
+      <name>outputNRRD2</name>
+      <longflag>outputNRRD2</longflag>
+      <label>Output NRRD img2</label>
+      <description>Output NRRD file for img2. Retains spacing, origin, and direction cosines.</description>
+      <channel>output</channel>
+      <default>img2.nrrd</default>
+    </image>
+
+    <image>
+      <name>outputPNG2</name>
+      <longflag>outputPNG2</longflag>
+      <label>Output PNG img2</label>
+      <description>Output PNG file for img2. Pixel data only, no physical metadata.</description>
+      <channel>output</channel>
+      <default>img2.png</default>
+    </image>
+
+  </parameters>
+
+  <parameters>
+    <label>Image 1 Parameters</label>
+    <description>Physical geometry and circle definition for img1</description>
+
+    <double-vector>
+      <name>spacing1</name>
+      <longflag>spacing1</longflag>
+      <label>Spacing img1 (mm/px)</label>
+      <description>Pixel size in mm along each axis (x y). Example: 0.5,0.5</description>
+      <default>0.5,0.5</default>
+    </double-vector>
+
+    <double-vector>
+      <name>origin1</name>
+      <longflag>origin1</longflag>
+      <label>Origin img1 (mm)</label>
+      <description>Physical coordinate of pixel index (0,0) in mm (x y). Example: 0.0,0.0</description>
+      <default>0.0,0.0</default>
+    </double-vector>
+
+    <double-vector>
+      <name>directionCosines1</name>
+      <longflag>directionCosines1</longflag>
+      <label>Direction Cosines img1</label>
+      <description>Row-major 2x2 direction cosine matrix (d00,d01,d10,d11). Identity (x-right y-down): 1.0,0.0,0.0,1.0</description>
+      <default>1.0,0.0,0.0,1.0</default>
+    </double-vector>
+
+    <integer-vector>
+      <name>sizePixels1</name>
+      <longflag>sizePixels1</longflag>
+      <label>Canvas Size img1 (px)</label>
+      <description>Image canvas width and height in pixels (x y). Example: 300,300</description>
+      <default>300,300</default>
+    </integer-vector>
+
+    <double-vector>
+      <name>centerMM1</name>
+      <longflag>centerMM1</longflag>
+      <label>Circle Centre img1 (mm)</label>
+      <description>Circle centre in physical space in mm (x y). Example: 50.0,50.0</description>
+      <default>50.0,50.0</default>
+    </double-vector>
+
+    <double>
+      <name>diameterMM1</name>
+      <longflag>diameterMM1</longflag>
+      <label>Circle Diameter img1 (mm)</label>
+      <description>Circle diameter in mm.</description>
+      <default>30.0</default>
+      <constraints><minimum>0.1</minimum><maximum>10000.0</maximum><step>0.1</step></constraints>
+    </double>
+
+  </parameters>
+
+  <parameters>
+    <label>Image 2 Parameters</label>
+    <description>Physical geometry and circle definition for img2</description>
+
+    <double-vector>
+      <name>spacing2</name>
+      <longflag>spacing2</longflag>
+      <label>Spacing img2 (mm/px)</label>
+      <description>Pixel size in mm along each axis (x y). Example: 0.5,0.5</description>
+      <default>0.5,0.5</default>
+    </double-vector>
+
+    <double-vector>
+      <name>origin2</name>
+      <longflag>origin2</longflag>
+      <label>Origin img2 (mm)</label>
+      <description>Physical coordinate of pixel index (0,0) in mm (x y). Example: 0.0,0.0</description>
+      <default>0.0,0.0</default>
+    </double-vector>
+
+    <double-vector>
+      <name>directionCosines2</name>
+      <longflag>directionCosines2</longflag>
+      <label>Direction Cosines img2</label>
+      <description>Row-major 2x2 direction cosine matrix (d00,d01,d10,d11). Identity (x-right y-down): 1.0,0.0,0.0,1.0</description>
+      <default>1.0,0.0,0.0,1.0</default>
+    </double-vector>
+
+    <integer-vector>
+      <name>sizePixels2</name>
+      <longflag>sizePixels2</longflag>
+      <label>Canvas Size img2 (px)</label>
+      <description>Image canvas width and height in pixels (x y). Example: 600,600</description>
+      <default>600,600</default>
+    </integer-vector>
+
+    <double-vector>
+      <name>centerMM2</name>
+      <longflag>centerMM2</longflag>
+      <label>Circle Centre img2 (mm)</label>
+      <description>Circle centre in physical space in mm (x y). Example: 200.0,200.0</description>
+      <default>200.0,200.0</default>
+    </double-vector>
+
+    <double>
+      <name>diameterMM2</name>
+      <longflag>diameterMM2</longflag>
+      <label>Circle Diameter img2 (mm)</label>
+      <description>Circle diameter in mm.</description>
+      <default>60.0</default>
+      <constraints><minimum>0.1</minimum><maximum>10000.0</maximum><step>0.1</step></constraints>
+    </double>
+
+  </parameters>
+
+</executable>
